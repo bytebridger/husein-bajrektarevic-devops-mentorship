@@ -1,1 +1,1 @@
-# This is just an example.
+🌐 DevOps mentorship tasks and assignments 🌐
