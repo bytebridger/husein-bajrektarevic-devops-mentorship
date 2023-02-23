@@ -1,1 +1,0 @@
-🌐 DevOps mentorship tasks and assignments 🌐
