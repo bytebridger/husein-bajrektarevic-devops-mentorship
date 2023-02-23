@@ -144,3 +144,13 @@
     - `|` - another pipe to grep ...
     `grep ==` - this command searches for lines in data.txt that contain the `==` in the input.
 
+## Level 10 - 11
+
+- Commands used:
+
+    - `ssh bandit10@bandit.labs.overthewire.org -p 2220`
+    - `ls`
+    - `base64 -d data.txt` - to decode the base64 data in the file. 
+
+    - ![level-10-11](.//img-level/bandit10.png)
+
