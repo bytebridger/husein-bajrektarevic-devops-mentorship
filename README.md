@@ -10,3 +10,5 @@
     - [x] Take screenshots of executed scripts.
     - [x] Create PR - post screenshots inside of it.
     - [x] Post PR as a comment on the ticket.
+
+- The content is placed inside week-3 directory.
