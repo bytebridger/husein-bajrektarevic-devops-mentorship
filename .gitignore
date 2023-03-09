@@ -9,6 +9,10 @@ testerror
 test17file
 testout
 testfile
+script.out
+test13b.out
+states
+test23.txt
 
 # ignore directory that is output of the script
 
