@@ -1,0 +1,24 @@
+# ignore files that are output of the script
+test13out
+test14out
+test17file
+test18file1
+test18file2
+test22file
+testerror
+test17file
+testout
+testfile
+script.out
+test13b.out
+states
+test23.txt
+
+# ignore directory that is output of the script
+
+dir.2aVGC9
+
+# ignore my script that I used to
+# make other scripts executable
+
+exe-perm.sh
