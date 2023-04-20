@@ -57,3 +57,7 @@
 - ![img-5](/Task-8/screenshots/img-5.PNG)
 
 - [x] Pri zavrsetku task-a kreirao AMI image pod nazivom `ami-ec2-husein-bajrektarevic-task-8`.
+
+- Dodatno: screenshot sa AWS certifikatima vidljivim u browseru: 
+
+![img-6](/Task-8/screenshots/img-6.PNG)
