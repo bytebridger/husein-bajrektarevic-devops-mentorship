@@ -2,7 +2,7 @@
     🌐 DevOps mentorship task solutions and notes 🌐
 </h3>
 
-This repository contains my task solutions and notes related to [AWS / Cloud / DevOps / Site Reliability Engineering / Platform Engineering / Production Engineering Mentorship program.](https://github.com/allops-solutions/devops-aws-mentorship-program)
+The repository contains my task solutions and notes related to [AWS / Cloud / DevOps / Site Reliability Engineering / Platform Engineering / Production Engineering Mentorship program.](https://github.com/allops-solutions/devops-aws-mentorship-program)
 
 <p align="center">
   <a>
