@@ -1,13 +1,13 @@
 ## TASK-9 solution
 
 - S3 bucket policy screenshot
-![s3-bucket-policy](/Task-9/img/s3-policy.PNG)
+![s3-bucket-policy](img/s3-policy.PNG)
 - S3 website endpoint screenshot
-![s3-endpoint](/Task-9/img/s3-endpoint.PNG)
+![s3-endpoint](img/s3-endpoint.PNG)
 - Distribution endpoint screenshot
-![distr-endpoint](/Task-9/img/distr-endpoint.PNG)
+![distr-endpoint](img/distr-endpoint.PNG)
 - Final version
-![final](/Task-9/img/final.PNG)
+![final](img/final.PNG)
 
 ## TASK-9 commands
 

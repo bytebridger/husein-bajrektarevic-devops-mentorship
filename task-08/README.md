@@ -13,7 +13,7 @@
 
 - `aws route53 list-resource-record-sets --hosted-zone-id Z3LHP8UIUC8CDK | jq '.ResourceRecordSets[] | select(.Name == "husein-bajrektarevic.awsbosnia.com.") | {Name, Value}'`
 
-- ![img-1](/Task-8/screenshots/img-1.PNG) 
+- ![img-1](screenshots/img-1.PNG) 
 
 - Napomena: 
     - Potrebno je instalirati `jq` tool prije toga:
@@ -21,7 +21,7 @@
 
 - [x] Na EC2 instanci `ec2-husein-bajrektarevic-task-8` kreirao sam Let's Encrypt SSL certifikat za moju domenu. Omogucio sam da se nodejs aplikaciji moze pristupiti preko linka `https://husein-bajrektarevic.awsbosnia.com`, sto se vidi u browseru sa certifikatom - screenshot ispod.
 
-- ![img-2](/Task-8/screenshots/img-2.PNG)
+- ![img-2](screenshots/img-2.PNG)
 
 - [x] Omoguciti autorenewal SSL certifikata
 
@@ -44,20 +44,20 @@
 
 - `echo | openssl s_client -showcerts -servername husein-bajrektarevic.awsbosnia.com -connect husein-bajrektarevic.awsbosnia.com:443 2>/dev/null | openssl x509 -inform pem -noout -text`
 
-- ![img-3](/Task-8/screenshots/img-3.PNG)
+- ![img-3](screenshots/img-3.PNG)
 
 - [x] Kreirao novi SSL certifikat unutar AWS Certified Managera, azurirao ALB da koristi novi SSL cert koji sam kreirao.
 
 - [x] Koristeci openssl komandu prikazao koji SSL certitikat koristim za moju domenu i datum njegovog isteka.
 
-- ![img-4](/Task-8/screenshots/img-4.PNG)
+- ![img-4](screenshots/img-4.PNG)
 
 - Dodatno: screenshot sa AWS Certificate Manager-a (ACM) gdje se vidi disabled importovan certifikat i da se koristi Amazon Issued.
 
-- ![img-5](/Task-8/screenshots/img-5.PNG)
+- ![img-5](screenshots/img-5.PNG)
 
 - [x] Pri zavrsetku task-a kreirao AMI image pod nazivom `ami-ec2-husein-bajrektarevic-task-8`.
 
 - Dodatno: screenshot sa AWS certifikatima vidljivim u browseru: 
 
-![img-6](/Task-8/screenshots/img-6.PNG)
+![img-6](screenshots/img-6.PNG)

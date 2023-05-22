@@ -10,12 +10,12 @@
 
 #### 1 - Browser gdje se vidi pristup aplikaciji koja se nalazi na EC2 instanci.
 
-![screenshot-1](/notes-img/screenshot-1.png)
+![screenshot-1](notes-img/screenshot-1.png)
 
 #### 2 - EC2 dashboard gdje se vidi EC2 instanca u statusu `stopped`.
 
-![screenshot-2](/notes-img/screenshot-2.png)
+![screenshot-2](notes-img/screenshot-2.png)
 
 #### 3 - CloudWatch Alarm kreiran za troskove.
 
-![screenshot-3](/notes-img/screenshot-3.png)
+![screenshot-3](notes-img/screenshot-3.png)
