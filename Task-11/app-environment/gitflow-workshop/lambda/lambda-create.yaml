@@ -1,0 +1,75 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  LambdaRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action: 'sts:AssumeRole'
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/IAMFullAccess
+        - arn:aws:iam::aws:policy/AdministratorAccess-AWSElasticBeanstalk
+        - arn:aws:iam::aws:policy/AWSCodeCommitReadOnly
+<<<<<<< HEAD
+#        - arn:aws:iam::aws:policy/AWSCodePipelineFullAccess -> deprecated
+=======
+>>>>>>> 1a2ef704010e33f0fedc2df9b6c473c799161c9a
+        - arn:aws:iam::aws:policy/AWSCodePipeline_FullAccess
+        - arn:aws:iam::aws:policy/CloudWatchEventsFullAccess
+        - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
+  PipelineCreateLambdaFunction:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      FunctionName: 'gitflow-workshop-create-pipeline'
+      Description: 'Lambda Function to create pipelines on branch creation'
+      Code:
+        S3Bucket: 'elasticbeanstalk-eu-central-1-129778447701'
+#        S3Key: 'pipeline-create.zip'
+#        S3Key: '.elasticbeanstalk'
+        S3Key: 'elasticbeanstalk.zip'
+      Handler: 'pipeline-create.lambda_handler'
+      Runtime: 'python3.8'
+      Role:
+        Fn::GetAtt:
+          - LambdaRole
+          - Arn
+  PipelineCreateLambdaPermission:
+    Type: 'AWS::Lambda::Permission'
+    DependsOn: PipelineCreateLambdaFunction
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      Principal: "codecommit.amazonaws.com"
+      FunctionName: 'gitflow-workshop-create-pipeline'
+  PipelineDeleteLambdaFunction:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      FunctionName: 'gitflow-workshop-delete-pipeline'
+      Description: 'Lambda Function to delete pipelines on branch deletion'
+      Code:
+        S3Bucket: 'elasticbeanstalk-eu-central-1-129778447701'
+<<<<<<< HEAD
+#        S3Key: 'pipeline-delete.zip'
+#        S3Key: '.elasticbeanstalk'
+        S3Key: 'elasticbeanstalk.zip'
+=======
+        S3Key: '.elasticbeanstalk'
+>>>>>>> 1a2ef704010e33f0fedc2df9b6c473c799161c9a
+      Handler: 'pipeline-delete.lambda_handler'
+      Runtime: 'python3.8'
+      Role:
+        Fn::GetAtt:
+          - LambdaRole
+          - Arn
+  PipelineDeleteLambdaPermission:
+    Type: 'AWS::Lambda::Permission'
+    DependsOn: PipelineDeleteLambdaFunction
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      Principal: "codecommit.amazonaws.com"
+      FunctionName: 'gitflow-workshop-delete-pipeline'
