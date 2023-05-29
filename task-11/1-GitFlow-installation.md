@@ -6,7 +6,7 @@
 
 - The main point of this task was to learn about high-level framework for how to implement GitFlow using AWS CodePipeline, AWS CodeCommit, AWS CodeBuild and AWS CodeDeploy. I've also had the opportunity to walk through a prebuilt example and examine how the framework can be adopted for individual use cases. 
 
-![GitFlow-animation](/Task-11/img/gitflow-workshop.gif)
+![GitFlow-animation](/task-11/img/gitflow-workshop.gif)
 
 ## 1 UVOD
 
@@ -38,7 +38,7 @@
 - Merge to master after every release.
 - Master contains production-ready code. 
 
-![gitflow-only](/Task-11/img/gitflow-only.png)
+![gitflow-only](/task-11/img/gitflow-only.png)
 
 - Vise informacija na [branching model](https://nvie.com/posts/a-successful-git-branching-model/) clanku.
 
@@ -47,7 +47,7 @@
 - Otvaramo `AWS Cloud9` konzolu na svom AWS racunu, selektujemo `Create environment` i imenujemo `gitflow-workshop`, sve ostale opcije ostavljamo po defaultu.
 - Kada se kreira environment, mozemo zatvoriti `welcome tab` i `lower work area` i potom otvoriti `terminal`.
 
-![screen-1](/Task-11/img/screen-1.PNG)
+![screen-1](/task-11/img/screen-1.PNG)
 
 #### AWS CLOUD9 IDE
 
@@ -67,11 +67,11 @@ $ touch resize.sh
 ```
 bash resize.sh 30
 ```
-![output-skripte](/Task-11/img/output-skripte.PNG)
+![output-skripte](/task-11/img/output-skripte.PNG)
 
 - Provjera velicine attachovanog EBS volume-a:
 
-![new-size](/Task-11/img/30GB.PNG)
+![new-size](/task-11/img/30GB.PNG)
 
 #### INITIAL SETUP
 
@@ -93,7 +93,7 @@ $ git config --global credential.UseHttpPath true
 
 - Screenshot izvrsenih komandi: 
 
-![git-config-komande](/Task-11/img/git-config-komande.PNG)
+![git-config-komande](/task-11/img/git-config-komande.PNG)
 
 - Zatim instaliramo `gitflow` koji je kolekcija Git extenzija koje omogucavaju high-level repository operacije za prethodno spomenuti Vincent Driessen's branching model:
 
@@ -106,5 +106,5 @@ $ sudo ./gitflow-installer.sh
 
 - Screenshot izvrsenih komandi:
 
-![gitflow-install](/Task-11/img/gitflow-install.PNG)
+![gitflow-install](/task-11/img/gitflow-install.PNG)
 
