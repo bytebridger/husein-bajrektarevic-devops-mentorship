@@ -2,7 +2,7 @@
 
 - U ovom modulu workshop-a koristiti cemo `AWS CloudFormation` da postavio nasu aplikaciju i infrastrukturu asociranu sa istom. Iskoristiti cemo i `AWS Elastic Beanstalk` da pojednostavimo neke stvari. 
 
-![eb-arhitektura](/Task-11/img/EB-architecture-GitFlow.png)
+![eb-arhitektura](/task-11/img/EB-architecture-GitFlow.png)
 
 #### NA MASTER BRANCH - ELASTIC BEANSTALK
 
@@ -20,11 +20,11 @@ $ aws codecommit create-repository --repository-name gitflow-workshop --reposito
 $ git clone https://git-codecommit.us-east-1.amazonaws.com/v1/repos/gitflow-workshop
 ```
 
-![kreiranje-codecommit-repoa](/Task-11/img/kreiranje-codecommit-repoa.PNG)
+![kreiranje-codecommit-repoa](/task-11/img/kreiranje-codecommit-repoa.PNG)
 
 - Potvrda da je repozitorij kreiran u AWS management konzoli:
 
-![codecommit-kreiran](/Task-11/img/codecommit-kreiran.PNG)
+![codecommit-kreiran](/task-11/img/codecommit-kreiran.PNG)
 
 #### STAGE 2 - DOWNLOAD THE SAMPLE CODE AND COMMIT YOUR CODE TO THE REPOSITORY
 
@@ -38,7 +38,7 @@ $ ASSETURL="https://static.us-east-1.prod.workshops.aws/public/442d5fda-58ca-41f
 ```
 $ unzip gitflow.zip -d gitflow-workshop/
 ```
-![sample-app-archive](/Task-11/img/sample-app-archive.PNG)
+![sample-app-archive](/task-11/img/sample-app-archive.PNG)
 
 - Promijeniti direktrij u nas lokalni repo folder i pokrenuti git add:
 
@@ -53,7 +53,7 @@ $ git add -A
 $ git commit -m "initial commit"
 $ git push origin master
 ```
-![git-commit](/Task-11/img/git-commit.PNG)
+![git-commit](/task-11/img/git-commit.PNG)
 
 #### CREATE ELASTIC BEANSTALK APPLICATION
 
@@ -67,11 +67,11 @@ $ aws cloudformation create-stack --template-body file://appcreate.yaml --stack-
 
 - Kada pokrenemo ovu komandu AWS CloudFormation pocinje kreiranje resursa koji su specificirani u templateu. Nas novi stack `gitflow-eb-app` se pojavljuje na listi unutar CloudFormation konzole.
 
-![gitflow-eb-app-cf](/Task-11/img/gitflow-eb-app-cf.PNG)
+![gitflow-eb-app-cf](/task-11/img/gitflow-eb-app-cf.PNG)
 
 - Nakon toga idemo u Elastic Beanstalk konzolu da viidmo aplikaciju koja je kreirana.
 
-![eb-app](/Task-11/img/eb-gitflow-app.PNG)
+![eb-app](/task-11/img/eb-gitflow-app.PNG)
 
 #### MASTER ENVIRONMENT 
 
@@ -85,13 +85,13 @@ $ aws cloudformation create-stack --template-body file://envcreate.yaml --parame
 
 - Screenshoti nakon kreiranog stack-a: 
 
-![stack-1](/Task-11/img/cf-stack-1.PNG)
-![stack-2](/Task-11/img/cf-stack-2.PNG)
+![stack-1](/task-11/img/cf-stack-1.PNG)
+![stack-2](/task-11/img/cf-stack-2.PNG)
 
 
 - Primjer deployane nodejs aplikacije kojoj se moze pristupiti preko linka iz AWS Elastic Beanstalk Environment Management Console. 
 
-![stack-3](/Task-11/img/cf-stack-3.PNG)
+![stack-3](/task-11/img/cf-stack-3.PNG)
 
 #### AWS CodePipeline
 
@@ -99,14 +99,14 @@ $ aws cloudformation create-stack --template-body file://envcreate.yaml --parame
 
 - Prethodni CloudFormation template je takodjer kreirao i konfigurisao jednostavan AWS CodePipeline sa tri akcije: source, build i deploy. 
 
-![stages-codepipeline](/Task-11/img/code-pipeline.png)
-![pipeline-succeeded](/Task-11/img/pipeline-succeeded.PNG)
+![stages-codepipeline](/task-11/img/code-pipeline.png)
+![pipeline-succeeded](/task-11/img/pipeline-succeeded.PNG)
 
 #### LAMBDA
 
 - Lambda je compute servis koji nam dopusta da runiramo kod bez provizioniranja ili menadzovanja servera.
 
-![lambda](/Task-11/img/lambda.png)
+![lambda](/task-11/img/lambda.png)
 
 #### LAMBDA CREATION
 
@@ -118,7 +118,7 @@ $ aws cloudformation create-stack --template-body file://lambda/lambda-create.ya
 
 - Kreirane Lambda funkcije
 
-![lambda-functions](/Task-11/img/lambda-created.PNG)
+![lambda-functions](/task-11/img/lambda-created.PNG)
 
 #### AWS CODECOMMIT TRIGGER
 
@@ -128,7 +128,7 @@ $ aws cloudformation create-stack --template-body file://lambda/lambda-create.ya
     - Send emails to subscribed users every time someone pushes to the repository.
     - Notify an external build system to start a build after someone pushes to the main branch of the repository
 
-![triggers](/Task-11/img/trigger-notifications.PNG)
+![triggers](/task-11/img/trigger-notifications.PNG)
 
 
 #### DEVELOP BRANCH
@@ -139,11 +139,11 @@ $ aws cloudformation create-stack --template-body file://lambda/lambda-create.ya
 ```
 $ git flow init
 ```
-![develop-branch](/Task-11/img/develop-branch.PNG)
+![develop-branch](/task-11/img/develop-branch.PNG)
 
 - Pushati izmjene na remote repozitorij
 
-![remote-repo](/Task-11/img/push-to-develop.PNG)
+![remote-repo](/task-11/img/push-to-develop.PNG)
 
 - Manuelno kreiran development environment za develop branch:
 
@@ -153,11 +153,11 @@ aws cloudformation create-stack --template-body file://envcreate.yaml --paramete
 
 - Screenshot kreiranog environment-a iz CloudFronta:
 
-![cf-develop](/Task-11/img/cf-develop-branch.PNG)
+![cf-develop](/task-11/img/cf-develop-branch.PNG)
 
 - Oba master i develop pipeline:
 
-![master-develop-pipeline](/Task-11/img/master-develop-pipeline.PNG)
+![master-develop-pipeline](/task-11/img/master-develop-pipeline.PNG)
 
 #### FEATURE BRANCH
 
@@ -183,15 +183,15 @@ $ aws cloudformation create-stack --template-body file://envcreate.yaml --capabi
 
 - All three environments active:
 
-![three-environments](/Task-11/img/three-environments.PNG)
+![three-environments](/task-11/img/three-environments.PNG)
 
 - Screenshot sa feature grane:
 
-![feature-branch](/Task-11/img/feature-branch.PNG)
+![feature-branch](/task-11/img/feature-branch.PNG)
 
 - Screenshot sa master grane:
 
-![master-branch](/Task-11/img/master-version-website.PNG)
+![master-branch](/task-11/img/master-version-website.PNG)
 
 #### FEATURE FINISH
 
@@ -201,7 +201,7 @@ $ aws cloudformation create-stack --template-body file://envcreate.yaml --capabi
 $ git flow feature finish change-color
 ```
 
-![merge-feature](/Task-11/img/merge-feature.PNG)
+![merge-feature](/task-11/img/merge-feature.PNG)
 
 - Sa komandom gore smo merge-ali change-color u develop branch, remove-ali smo feature branch i switch-ovali nazad na develop branch. 
 
@@ -210,7 +210,7 @@ $ git flow feature finish change-color
 ```
 git push origin --delete feature/change-color 
 ```
-![delete-feature](/Task-11/img/delete-feature-branch.PNG)
+![delete-feature](/task-11/img/delete-feature-branch.PNG)
 
 - Commitamo develop branch: 
 
@@ -220,4 +220,4 @@ git push --set-upstream origin develop
 
 - Posljednje izmjene (sa bojom) su vidljive sada na develop branchu:
 
-![last-changes](/Task-11/img/last-changes.PNG)
+![last-changes](/task-11/img/last-changes.PNG)
