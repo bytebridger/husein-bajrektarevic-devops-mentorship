@@ -1,0 +1,27 @@
+- name: Verify MySQL database connection
+  hosts: webservers
+  gather_facts: false
+  become: true
+
+  tasks:
+    - name: Install telnet
+      package:
+        name: telnet
+        state: present
+
+    - name: Verify MySQL database connection
+      wait_for:
+        host: "{{ item }}"
+        port: 3306  
+        timeout: 5
+      ignore_errors: true
+      register: mysql_connection_status
+      # with_items:
+      #   - 3.120.32.157
+      #   - 52.57.41.189
+      # instead of using IP addresses, better practice is 
+      # to loop through
+      loop: "{{ groups['database-servers'] }}"
+    - name: Print connection status
+      debug:
+        msg: "MySQL database connection {{ 'succeeded' if mysql_connection_status is success else 'failed' }}"

@@ -1,0 +1,16 @@
+{
+  "builders": [{
+    "type": "amazon-ebs",
+    "region": "eu-central-1",
+    "source_ami": "ami-041dc559818ef6e9b",
+    "instance_type": "t2.micro",
+    "ssh_username": "ec2-user",
+    "temporary_key_pair_type": "ed25519",
+    "ami_name": "packer-nginx-mysql-ami {{timestamp}}"  
+  }],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "nginx-mysql-script.sh"
+}]
+}

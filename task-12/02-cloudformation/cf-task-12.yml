@@ -1,0 +1,98 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: This template creates two EC2 instances and Security Groups
+
+Parameters:
+  InstanceName:
+    Description: Please enter Instance Name
+    Type: String
+    Default: web-server
+  InstanceType:
+    Description: Please choose a supported instance type
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+      - t2.medium
+      - t2.large
+  StageName:
+    Type: String
+    Description: Please choose a supported stage
+    Default: dev
+    AllowedValues:
+      - dev
+      - prod
+
+Resources:
+  WebServerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for SSH and HTTP access
+      VpcId: vpc-0ea7a88b3818e57f7  
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: '-1'
+          FromPort: 0
+          ToPort: 0
+          CidrIp: 0.0.0.0/0
+
+  DatabaseServerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for MySQL
+      VpcId: vpc-0ea7a88b3818e57f7  
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: '-1'
+          FromPort: 0
+          ToPort: 0
+          CidrIp: 0.0.0.0/0
+
+  WebServerInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0ce2f996605c388e7 
+      InstanceType: !Ref InstanceType
+      SubnetId: subnet-0f2293bbca5229391  
+      SecurityGroupIds:
+        - !Ref WebServerSecurityGroup
+      KeyName: ec2-key
+      Tags:
+        - Key: Name
+          Value: !Ref InstanceName
+        - Key: Stage
+          Value: !Ref StageName
+
+  DatabaseServerInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0ce2f996605c388e7
+      InstanceType: !Ref InstanceType
+      SubnetId: subnet-02e9014677366eaf1  
+      SecurityGroupIds:
+        - !Ref DatabaseServerSecurityGroup
+      KeyName: ec2-key
+      Tags:
+        - Key: Name
+          Value: database-server
+        - Key: Stage
+          Value: !Ref StageName
+
+Outputs:
+  WebServerInstanceID:
+    Description: The Instance ID of the web server
+    Value: !Ref WebServerInstance
+  DatabaseServerInstanceID:
+    Description: The Instance ID of the database server
+    Value: !Ref DatabaseServerInstance
