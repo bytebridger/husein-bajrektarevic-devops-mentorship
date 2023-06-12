@@ -1,0 +1,47 @@
+---
+- name: Install Nginx and execute update scripts
+  hosts: webservers
+  become: true
+  tasks:
+    - name: Install Nginx
+      yum:
+        name: nginx
+        state: present
+
+    - name: Start Nginx service
+      service:
+        name: nginx
+        state: started
+
+    - name: Enable Nginx service
+      service:
+        name: nginx
+        enabled: yes
+
+    - name: Copy first script to the first host
+      copy:
+        src: update-first-host.sh
+        dest: /usr/share/nginx/html/update-first-host.sh
+        owner: root
+        group: root
+        mode: 0777
+      when: inventory_hostname == groups['webservers'][0]
+
+    - name: Copy second script to the second host
+      copy:
+        src: update-second-host.sh
+        dest: /usr/share/nginx/html/update-second-host.sh
+        owner: root
+        group: root
+        mode: 0777
+      when: inventory_hostname == groups['webservers'][1]
+
+    - name: Run first script on the first host
+      shell: /usr/share/nginx/html/update-first-host.sh
+      delegate_to: "{{ groups['webservers'][0] }}"
+      when: inventory_hostname == groups['webservers'][0]
+
+    - name: Run second script on the second host
+      shell: /usr/share/nginx/html/update-second-host.sh
+      delegate_to: "{{ groups['webservers'][1] }}"
+      when: inventory_hostname == groups['webservers'][1]

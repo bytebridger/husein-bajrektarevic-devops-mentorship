@@ -22,3 +22,5 @@ dir.2aVGC9
 # make other scripts executable
 
 exe-perm.sh
+
+.vscode
