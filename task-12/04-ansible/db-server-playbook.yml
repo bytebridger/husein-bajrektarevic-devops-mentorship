@@ -1,0 +1,42 @@
+---
+- name: Install MySQL
+  hosts: database_server_group
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Import MySQL GPG key
+      shell: rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+
+    - name: Download MySQL repository package
+      shell: "wget -O /home/ec2-user/mysql57-community-release-el7-8.noarch.rpm http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm"
+
+    - name: Check if MySQL repository package is installed
+      command: yum list installed mysql57-community-release
+      register: mysql_repo_package
+      changed_when: false
+      ignore_errors: true
+
+    - name: Install MySQL repository package
+      command: yum install -y /home/ec2-user/mysql57-community-release-el7-8.noarch.rpm
+      when: "'mysql57-community-release' not in mysql_repo_package.stdout"
+
+    - name: Confirm MySQL repository package installation
+      command: yum list installed mysql57-community-release
+      register: mysql_repo_package_check
+      changed_when: false
+
+    - name: Display MySQL repository package installation status
+      debug:
+        msg: "MySQL repository package is already installed."
+      when: "'mysql57-community-release' in mysql_repo_package_check.stdout"
+
+    - name: Install MySQL server package
+      yum:
+        name: mysql-community-server
+        state: present
+
+    - name: Start MySQL service
+      service:
+        name: mysqld
+        state: started
+        enabled: true

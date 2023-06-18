@@ -21,13 +21,31 @@ Parameters:
     AllowedValues:
       - dev
       - prod
+  WebServerImageId:
+    Type: AWS::EC2::Image::Id
+    Description: Please enter the Image ID for the web server
+  DatabaseServerImageId:
+    Type: AWS::EC2::Image::Id
+    Description: Please enter the Image ID for the database server
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+    Description: Please enter the VPC ID
+  WebServerSubnetId:
+    Type: AWS::EC2::Subnet::Id
+    Description: Please enter the Subnet ID for the web server
+  DatabaseServerSubnetId:
+    Type: AWS::EC2::Subnet::Id
+    Description: Please enter the Subnet ID for the database server
+  KeyPairName:
+    Type: String
+    Description: Please enter the name for the new Key Pair
 
 Resources:
   WebServerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Security group for SSH and HTTP access
-      VpcId: vpc-0ea7a88b3818e57f7  
+      VpcId: !Ref VpcId
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 22
@@ -39,35 +57,33 @@ Resources:
           CidrIp: 0.0.0.0/0
       SecurityGroupEgress:
         - IpProtocol: '-1'
-          FromPort: 0
-          ToPort: 0
           CidrIp: 0.0.0.0/0
 
   DatabaseServerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Security group for MySQL
-      VpcId: vpc-0ea7a88b3818e57f7  
+      VpcId: !Ref VpcId
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 3306
           ToPort: 3306
           CidrIp: 0.0.0.0/0
       SecurityGroupEgress:
-        - IpProtocol: '-1'
-          FromPort: 0
-          ToPort: 0
-          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          DestinationSecurityGroupId: !Ref WebServerSecurityGroup
 
   WebServerInstance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0ce2f996605c388e7 
+      ImageId: !Ref WebServerImageId
       InstanceType: !Ref InstanceType
-      SubnetId: subnet-0f2293bbca5229391  
+      SubnetId: !Ref WebServerSubnetId
       SecurityGroupIds:
         - !Ref WebServerSecurityGroup
-      KeyName: ec2-key
+      KeyName: !Ref KeyPairName
       Tags:
         - Key: Name
           Value: !Ref InstanceName
@@ -77,17 +93,22 @@ Resources:
   DatabaseServerInstance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0ce2f996605c388e7
+      ImageId: !Ref DatabaseServerImageId
       InstanceType: !Ref InstanceType
-      SubnetId: subnet-02e9014677366eaf1  
+      SubnetId: !Ref DatabaseServerSubnetId
       SecurityGroupIds:
         - !Ref DatabaseServerSecurityGroup
-      KeyName: ec2-key
+      KeyName: !Ref KeyPairName
       Tags:
         - Key: Name
           Value: database-server
         - Key: Stage
           Value: !Ref StageName
+
+  NewKeyPair:
+    Type: AWS::EC2::KeyPair
+    Properties:
+      KeyName: !Ref KeyPairName
 
 Outputs:
   WebServerInstanceID:
@@ -96,3 +117,6 @@ Outputs:
   DatabaseServerInstanceID:
     Description: The Instance ID of the database server
     Value: !Ref DatabaseServerInstance
+  NewKeyPairName:
+    Description: The name of the newly created Key Pair
+    Value: !Ref KeyPairName

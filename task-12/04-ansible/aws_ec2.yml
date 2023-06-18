@@ -1,0 +1,18 @@
+plugin: amazon.aws.aws_ec2
+regions:
+  - "eu-central-1"
+filters:
+  instance-state-name: running
+compose:
+  ansible_host: public_ip_address
+keyed_groups:
+  - prefix: name
+    key: tags.Name
+groups:
+  database_server_group: "'database_server' in (tags.Name | default([]))"
+
+
+
+
+
+
