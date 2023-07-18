@@ -166,4 +166,6 @@
 
 ![aws-glue-jobs](/task-xx-workshops/01-aws-glue/img/16-aws-glue-jobs.png)
 
-* AWS Glue → Data integration and ETL → ETL jobs
+#### NOTE:
+
+* **Ostatak videa je outdated po pitanju UI-a koji se poprilicno izmijenio po pitanju opcija tako da nastavio sam AWS Glue learning journey kroz workshop u nastavku.**
