@@ -4,11 +4,11 @@
 
 #### Course overview
 
-![course-overview](/task-xx-workshops/01-aws-glue/img/01-overview.png)
+![course-overview](/task-xx-workshops/01-aws-glue-yt/img/01-overview.png)
 
 #### What is AWS Glue?
 
-![aws-glue](/task-xx-workshops/01-aws-glue/img/02-aws-glue-explained.png)
+![aws-glue](/task-xx-workshops/01-aws-glue-yt/img/02-aws-glue-explained.png)
 
 * U potpunosti menadzovan ETL servis koji se sastoji od Central Metadata Repository - pod nazivom Glue Data Catalog.
 * Sadrzi Spart ETL Engine koji je u potpunosti serverless.
@@ -22,7 +22,7 @@
 
 #### Setup work
 
-![setup-work](/task-xx-workshops/01-aws-glue/img/03-setup-work.png)
+![setup-work](/task-xx-workshops/01-aws-glue-yt/img/03-setup-work.png)
 
 * KORACI za S3 setup:
 
@@ -45,7 +45,7 @@
 
 #### AWS Glue Data Catalog
 
-![aws-glue-data-catalog](/task-xx-workshops/01-aws-glue/img/04-aws-glue-data-catalog.png)
+![aws-glue-data-catalog](/task-xx-workshops/01-aws-glue-yt/img/04-aws-glue-data-catalog.png)
 
 * Persistent Metadata Store     
     * Metadata moze biti data location, schema, data types, data classification
@@ -63,13 +63,13 @@
     * Search AWS Glue i mozemo da vidimo samu sustinu Glue-a:
         *  Data catalog → Databases → Crawlers → Schemas
 
-![glue-dashboard](/task-xx-workshops/01-aws-glue/img/05-aws-glue-console.png)
+![glue-dashboard](/task-xx-workshops/01-aws-glue-yt/img/05-aws-glue-console.png)
 
 * Sada cemo vidjeti sta su databases i kako mozemo koristiti crawler da kreiramo database table.
 
 #### AWS Glue Databases
 
-![aws-glue-db](/task-xx-workshops/01-aws-glue/img/06-aws-glue-db.png)
+![aws-glue-db](/task-xx-workshops/01-aws-glue-yt/img/06-aws-glue-db.png)
 
 * AWS Glue database je set povezanih Data Catalog tabela organiziranih u logicku grupu.
 
@@ -78,19 +78,19 @@
     * Data catalog → Databases → Add database → `customers_database`
     * Napomena - prilikom naming konvencije uvijek koristiti underscore `_` zbog Spark engine-a.
 
-![glue-db](/task-xx-workshops/01-aws-glue/img/07-glue-database.png)
+![glue-db](/task-xx-workshops/01-aws-glue-yt/img/07-glue-database.png)
 
 * Sad kad imamo database setovan mozemo kreirati tables.
 
 #### AWS Glue Tables
 
-![glue-tables](/task-xx-workshops/01-aws-glue/img/08-aws-glue-tables.png)
+![glue-tables](/task-xx-workshops/01-aws-glue-yt/img/08-aws-glue-tables.png)
 
 * Glue Tables sadrze metadata definicije koje predstavljaju nas data. Koncept koji bi trebali razumjeti prije nego kreiramo ove tables je vezan za particije unutar AWS-a.
 
 #### Partitions in AWS
 
-![partitions-aws](/task-xx-workshops/01-aws-glue/img/09-partitions-in-aws.png)
+![partitions-aws](/task-xx-workshops/01-aws-glue-yt/img/09-partitions-in-aws.png)
 
 * Direktoriji gdje data je pohranjen na S3, koji su fizicki entiteti, su mapirani na particije koje su logicki entiteti, npr. columns unutar Glue table-a.
 
@@ -104,7 +104,7 @@
 
 #### AWS Glue Crawlers
 
-![glue-crawlers](/task-xx-workshops/01-aws-glue/img/10-crawlers.png)
+![glue-crawlers](/task-xx-workshops/01-aws-glue-yt/img/10-crawlers.png)
 
 * Crawler is a program that connects to a data store (source or target), progresses through a prioritized list of classifiers to determine the schema for your data, and then creates metadata tables in the AWS Glue Data Catalog.
 
@@ -128,7 +128,7 @@
     * Column 2 → Name: customer_id → Data Type: smalling 
         * for this one we used information from `customers.csv`
 
-![define-schema](/task-xx-workshops/01-aws-glue/img/11-define-schema.png)
+![define-schema](/task-xx-workshops/01-aws-glue-yt/img/11-define-schema.png)
 
 * Vidimo koliko zapravo ima posla da se rucno unose podaci, da bi sebi olaksali zivot mozemo koristiti `crawler` koji ce to automatski odraditi za nas. Izaci cemo iz ovog dijela i necemo snimiti nasu schemu nego cemo ponovo ici na proces dodavanja tabele ali ovaj put koristeci → `Add tables using crawler` opciju.
 
@@ -137,12 +137,12 @@
 
 * Dalje, selektujemo IAM Role koji smo prethodno kreirali, zatim database i kliknemo na Create crawler.
 
-![create-crawler](/task-xx-workshops/01-aws-glue/img/12-create-crawler.png)
+![create-crawler](/task-xx-workshops/01-aws-glue-yt/img/12-create-crawler.png)
 
 * Unutar `Crawlers` oznacimo nas crawler i kliknemo na run.
 * Ako odemo na AWS Glue → Tables → customers_csv vidjeti cemo da je crawler pokupio column names:
 
-![column-names](/task-xx-workshops/01-aws-glue/img/13-column-names.png)
+![column-names](/task-xx-workshops/01-aws-glue-yt/img/13-column-names.png)
 
 * Ako kliknemo na partitions vidimo particiju isto i ako zelimo vidjeti data → kliknemo Actions → View data → redirectovati ce nas na Athenu.
 
@@ -150,13 +150,13 @@
 
 * Zatim idemo nazad na Editor u Atheni i kliknemo na Tables → customers_csv → Preview table.
 
-![table-preview-athena](/task-xx-workshops/01-aws-glue/img/14-athena-preview.png)
+![table-preview-athena](/task-xx-workshops/01-aws-glue-yt/img/14-athena-preview.png)
 
 * Prije nego predjemo na kreiranje AWS Glue job-a trebali bi provjeriti sta su AWS Glue connections. 
 
 #### AWS Glue connections
 
-![aws-glue-connections](/task-xx-workshops/01-aws-glue/img/15-aws-glue-connections.png)
+![aws-glue-connections](/task-xx-workshops/01-aws-glue-yt/img/15-aws-glue-connections.png)
 
 * Glue connections su zapravo Data Catalog objekat koji sadrzi properties potrebni za konektovanje na odredjeni data store.
 
@@ -164,7 +164,7 @@
 
 * The business logic that is required to perform ETL work. It is composed of a transformation script, data sources, and data targets. Job runs are initiated by triggers that can be scheduled or triggered by events. 
 
-![aws-glue-jobs](/task-xx-workshops/01-aws-glue/img/16-aws-glue-jobs.png)
+![aws-glue-jobs](/task-xx-workshops/01-aws-glue-yt/img/16-aws-glue-jobs.png)
 
 #### NOTE:
 
