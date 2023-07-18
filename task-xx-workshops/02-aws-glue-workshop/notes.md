@@ -62,3 +62,35 @@
     * Open AWS Glue in our AWS Console
     * On the left sidebar, choose Crawlers and Create crawler*.
     * Name: "covid_bitcoin_raw_crawler"
+
+![crawler](/task-xx-workshops/02-aws-glue-workshop/img/03-crawler.png)
+
+* Creating a Glue Job
+    * AWS Glue - ETL Jobs
+    * Job details - "covid-bitcoin-job"
+    * IAM Role - "GlueStudioWorkshopRole"
+    * NOTE: GlueStudioWorkshopRole has access to all S3 buckets. This is ok for our workshop. But in a production scenario, you need to be more restrictive about permissions, only allowing necessary operations to specific S3 buckets.
+    * Since our datasets are very small, let's use just 2 workers with G.1X. It is more than enough for our case.
+
+![job-details](/task-xx-workshops/02-aws-glue-workshop/img/03-job-details.png)
+
+* Load Covid data from S3
+    * Click Add node button ( + ) and then Source - S3. 
+
+![s3-source](/task-xx-workshops/02-aws-glue-workshop/img/04-created-s3.png)
+
+* Drop a column & fix the type of a field
+    * Drop "fips" column.
+    * Use transform option.
+
+![transform](/task-xx-workshops/02-aws-glue-workshop/img/05-transform.png)
+
+* Write the data into S3 bucket in Parquet format 
+
+![parquet](/task-xx-workshops/02-aws-glue-workshop/img/06-parquet-format-s3.png)
+
+* Load Bitcoin data from S3
+
+![s3-bitcoin](/task-xx-workshops/02-aws-glue-workshop/img/07-s3-bucket-bitcoin.png)
+
+* Write the data into S3 bucket in Parquet format
