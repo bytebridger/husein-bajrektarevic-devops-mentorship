@@ -17,7 +17,7 @@
 
 a_str = "This is an example of a string in quotes" # In python the word string is abbreviated to str
 
-my_float = 5.5
+my_float = 5.5 # float number example
 
 an_integer = 5 # integer is abbreviated to int
 
