@@ -51,8 +51,8 @@ print(sentence + str(my_int))
 
 # Other useful methods are: 
 
-    str()   # returns a string object
-    int()   # returns an integer object
-    float() # returns a floating point object
-    bool()  # a boolean value of True or False
+str()   # returns a string object
+int()   # returns an integer object
+float() # returns a floating point object
+bool()  # a boolean value of True or False
 
