@@ -1,3 +1,5 @@
+# Example of a string in Python
+
 some_string = "Hello Python"
 print(some_string)
 
