@@ -25,7 +25,7 @@ last_name = "Python"
 # which will concatenate them
 
 print(first_name+last_name)
-MontyPython
+# OUTPUT: MontyPython
 
 
 # ===========================
